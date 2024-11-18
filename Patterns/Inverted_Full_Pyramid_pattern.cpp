@@ -9,16 +9,11 @@ int main()
 
     for(int i = 0; i < n; i++)
     {
-        for(int j = n-i-1; j>0; j--)
+        for(int j = 0; j<i; j++)
         cout<<"  ";
 
-        for(int j = 0; j<(2*i+1); j++)
-        {
-            if(j==0 || j==(2*i) || i==(n-1))
-            cout<<"* ";
-            else
-            cout<<"  ";
-        }
+        for(int j = 2*(n-i)-1; j>0; j--)
+        cout<<"* ";
 
         cout<<endl;
     }
