@@ -7,16 +7,16 @@ int main()
     cout<<"Enter n: ";
     cin>>n;
 
+    int count = 1;
+
     for(int i = 0; i<n; i++)
     {
         for(int j = 0; j<=i; j++)
         {
-            if(j%2==1)
-            cout<<"0";
-            else
-            cout<<"1";
+            cout << to_string(count++) << " ";
         }
         cout<<endl;
     }
+    
     return 0;
 }
