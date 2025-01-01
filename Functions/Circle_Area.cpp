@@ -10,7 +10,7 @@ int main()
 {
     float radius;
     cout<<"Enter the Radius of given Circle: ";
-    cin>> radius;
+    cin>>radius;
 
     cout<< area(radius) << " is the area of Cicle with given Radius.";
     return 0;

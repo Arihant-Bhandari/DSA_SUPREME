@@ -12,7 +12,7 @@ int main()
 {
     int n;
     cout<<"Enter a no.: ";
-    cin>> n;
+    cin>>n;
 
     oddEven(n);
     return 0;

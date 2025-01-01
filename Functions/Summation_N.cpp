@@ -14,7 +14,7 @@ int main()
 {
     int n;
     cout<<"Enter a no.: ";
-    cin>> n;
+    cin>>n;
 
     cout << "The summation till " << n << " is: " << summation(n);
     return 0;

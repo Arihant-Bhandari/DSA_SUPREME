@@ -18,7 +18,7 @@ int main()
 {
     int n;
     cout<<"Enter a no.: ";
-    cin>> n;
+    cin>>n;
 
     if(primeNum(n))
     cout << n << " is a Prime Number.";
