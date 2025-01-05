@@ -18,7 +18,7 @@ int main()
     cout << "Enter no. of digits you want: ";
     cin >> n;
 
-    if(to_string(n).length() < to_string(INT_MAX).length())
+    if(to_string(n).length() < 10)
     {
         int digits[n];
 
