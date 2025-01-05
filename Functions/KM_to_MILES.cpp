@@ -3,7 +3,7 @@ using namespace std;
 
 float kmToMiles(float km)
 {
-    return km * 0.6214;
+    return km * 0.621371;
 }
 int main()
 {
