@@ -1,30 +1,27 @@
 #include <iostream>
 using namespace std;
 
-void sort(int arr[], int size)
+void sortNP(int arr[], int size)
 {
-    int front = 0, end = size-1; 
+    int neg = 0, pos = size-1;
 
-    while(front < end)
+    while(neg < pos)
     {
-        if(arr[end] == 1)
-        --end;
-        if(arr[front] == 0)
-        ++front;
-        if(arr[front] == 1)
+        if(arr[neg] < 0)
+        ++neg;
+        if(arr[pos] > 0)
+        --pos;
+        else
         {
-            int temp = arr[front];
-            arr[front] = arr[end];
-            arr[end] = temp;
-            front++;
-            end--;
+            arr[pos] ^= arr[neg];
+            arr[neg] ^= arr[pos];
+            arr[pos] ^= arr[neg];
         }
     }
-
     for(int i = 0; i < size; i++)
     {
         cout << arr[i] << " ";
-    }    
+    }  
 }
 int main()
 {
@@ -40,7 +37,7 @@ int main()
         cin >> arr[i];
     }
 
-    sort(arr, n);
+    sortNP(arr, n);
 
     return 0;
 }
