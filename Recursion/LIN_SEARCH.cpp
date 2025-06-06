@@ -3,13 +3,11 @@ using namespace std;
 
 int linearSearch(int arr[], int size, int index, int key)
 {
-    if(index < size)
-    {
-        if(arr[index] == key) return index;
-        return linearSearch(arr, size, index + 1, key);
-    }
+    if(index == size) return -1;
     
-    return -1;
+    if(arr[index] == key) return index;
+    
+    return linearSearch(arr, size, index + 1, key);
 }
 int main()
 {
