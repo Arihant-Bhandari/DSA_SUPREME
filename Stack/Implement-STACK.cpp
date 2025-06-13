@@ -27,7 +27,7 @@ class Stack
     void pop()
     {
         if(top == -1) cout << "STACK UNDERFLOW." << endl;
-        else arr[top--] = -1;
+        else top--;
     }
     bool isEmpty()
     {
@@ -36,14 +36,14 @@ class Stack
     }
     int getTop()
     {
+        cout << "TOP: ";
+        
         if(top == -1) 
         {
             cout << "STACK EMPTY." << endl;
             return -1;
         }
-
-        cout << "TOP: ";
-        return arr[top];
+        else return arr[top];
     }
     int getSize()
     {
@@ -52,7 +52,7 @@ class Stack
     }
     void print()
     {
-        cout << "PRINTING STACK: ";
+        cout << "PRINTING QUEUE: ";
         for(int i = 0; i < size; i++)
         cout << arr[i] << " ";
         cout << endl;
