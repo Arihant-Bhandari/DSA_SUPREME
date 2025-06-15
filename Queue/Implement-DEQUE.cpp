@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-class CQueue
+class Deque
 {
     private:
     int* arr;
@@ -10,21 +10,41 @@ class CQueue
     int rear;
 
     public:
-    CQueue(int size)
+    Deque(int size)
     {
         arr = new int[size];
         this -> size = size;
         front = -1;
         rear = -1;
     }
-    void push(int val)
+    void push_front(int val)
     {
         if(front == 0 && rear == size - 1 || rear == front - 1)
         {
-            cout << "QUEUE FULL: OVERFLOW." << endl;
+            cout << "STACK FULL: OVERFLOW." << endl;
             return;
         }
 
+        if(front == -1 && rear == -1)
+        {
+            ++front;
+            arr[++rear] = val;
+        }
+        else if(front == 0 && rear != size -1)
+        {
+            front = size - 1;
+            arr[front] = val;
+        }
+        else arr[--front] = val;
+    }
+    void push_back(int val)
+    {
+        if(rear == size - 1 && front == 0 || rear == front - 1)
+        {
+            cout << "STACK FULL: OVERFLOW." << endl;
+            return;
+        }
+        
         if(front == -1 && rear == -1)
         {
             ++front;
@@ -37,57 +57,47 @@ class CQueue
         }
         else arr[++rear] = val;
     }
-    void pop()
+    void pop_front()
     {
         if(front == -1 && rear == -1)
         {
-            cout << "QUEUE EMPTY: UNDERFLOW." << endl;
-            return;
+            cout << "STACK EMPTY: UNDERFLOW." << endl;
+            return; 
         }
 
-        if(front == rear) 
+        if(front == rear)
         {
-            arr[front++] = -1;
+            arr[front] = -1;
             front = -1;
             rear = -1;
         }
-        else if(front == size -1)
+        else if(front == size - 1)
         {
             arr[front] = -1;
             front = 0;
         }
         else arr[front++] = -1;
     }
-    bool isEmpty()
+    void pop_back()
     {
-        return front == -1;
-    }
-    int getSize()
-    {
-        cout << "SIZE: ";
-        return rear - front + 1;
-    }
-    int getFront()
-    {
-        if(front == -1)
+        if(front == -1 && rear == -1)
         {
-            cout << "QUEUE EMPTY.";
-            return -1;
+            cout << "STACK EMPTY: UNDERFLOW." << endl;
+            return;
         }
 
-        cout << "FRONT: ";
-        return arr[front];
-    }
-    int getRear()
-    {
-        if(rear == -1)
+        if(front == rear)
         {
-            cout << "QUEUE EMPTY.";
-            return -1;
+            arr[rear] = -1;
+            front = -1;
+            rear = -1;
         }
-
-        cout << "REAR: ";
-        return arr[rear];
+        else if(rear == 0)
+        {
+            rear = size - 1;
+            arr[rear] = -1;
+        }
+        else arr[rear--] = -1;
     }
     void print()
     {
@@ -104,48 +114,42 @@ int main()
     cout << "Enter Size: ";
     cin >> n;
 
-    CQueue queue(n);
+    Deque queue(n);
 
-    queue.push(1);
+    queue.push_front(1);
     queue.print();
 
-    queue.push(2);
+    queue.push_front(2);
     queue.print();
     
-    queue.push(3);
-    queue.print();
-
-    cout << queue.getRear() << endl;
-    
-    queue.push(4);
+    queue.push_front(3);
     queue.print();
     
-    queue.push(5);
-    queue.print();
-
-    cout << queue.getSize() << endl;
-
-    queue.pop();
-    queue.print();
-
-    queue.pop();
-    queue.print();
-
-    queue.pop();
-    queue.print();
-
-    cout << queue.getFront() << endl;
-
-    queue.push(6);
+    queue.push_back(4);
     queue.print();
     
-    queue.push(7);
+    queue.push_back(5);
     queue.print();
 
-    queue.push(8);
+    queue.pop_front();
+    queue.print();
+
+    queue.pop_back();
+    queue.print();
+
+    queue.pop_front();
+    queue.print();
+
+    queue.push_front(6);
     queue.print();
     
-    queue.push(9);
+    queue.push_back(7);
+    queue.print();
+
+    queue.push_front(8);
+    queue.print();
+    
+    queue.push_back(9);
     queue.print();
     return 0;
 }
