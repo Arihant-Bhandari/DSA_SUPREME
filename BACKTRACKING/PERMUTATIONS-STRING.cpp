@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-void solve(string s, int index)
+void permutations(string s, int index)
 {
     if(index >= s.length())
     {
@@ -12,7 +12,7 @@ void solve(string s, int index)
     for(int j = index; j < s.length(); j++)
     {
         swap(s[index], s[j]);
-        solve(s, index + 1);
+        permutations(s, index + 1);
         swap(s[index], s[j]);
     }
 }
@@ -22,7 +22,8 @@ int main()
     cout << "Enter STRING: ";
     cin >> s;
 
-    solve(s, 0);
+    cout << "STRING PERMUTATIONS: ";
+    permutations(s, 0);
 
     return 0;
 }
