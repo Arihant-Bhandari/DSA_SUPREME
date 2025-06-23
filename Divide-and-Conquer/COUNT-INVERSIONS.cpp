@@ -55,13 +55,12 @@ int main()
         cin >> arr[i];
     }
 
-    cout << "\nMERGE SORT: ASCENDING ORDER\n\n";
-
     int sum = 0;
     countInversions(arr, 0, n - 1, sum);
     
-    cout << sum << endl;
+    cout << "\nINVERSIONS: " << sum << endl;
 
+    cout << "\nMERGE SORT: ASCENDING ORDER\n";
     for(auto i : arr) cout << i << " ";
     return 0;
 }
