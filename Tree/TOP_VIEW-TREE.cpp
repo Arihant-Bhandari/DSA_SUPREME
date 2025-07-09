@@ -1,6 +1,6 @@
 #include <iostream>
 #include <queue>
-#include <vector>
+#include <map>
 using namespace std;
 
 class TreeNode
@@ -37,8 +37,9 @@ TreeNode* create()
 }
 void levelorder(TreeNode* root)
 {
-    queue<TreeNode*> que;
+    if(root == NULL) return;
 
+    queue<TreeNode*> que;
     que.push(root);
     que.push(NULL);
 
@@ -60,14 +61,30 @@ void levelorder(TreeNode* root)
         }
     }
 }
-void rightview(TreeNode* root, int level, vector<int> &right)
+void topview(TreeNode* root)
 {
     if(root == NULL) return;
 
-    if(level == right.size()) right.push_back(root -> val);
+    map<int, int> mapper;
+    queue<pair<TreeNode*, int>> que;
 
-    rightview(root -> right, level + 1, right);
-    rightview(root -> left, level + 1, right);
+    que.push(make_pair(root, 0));
+
+    while(!que.empty())
+    {
+        pair<TreeNode*, int> temp = que.front();
+        que.pop();
+
+        if(mapper.find(temp.second) == mapper.end()) 
+        mapper[temp.second] = temp.first -> val;
+
+        if(temp.first -> left != NULL) que.push(make_pair(temp.first -> left, temp.second - 1));
+        if(temp.first -> right != NULL) que.push(make_pair(temp.first -> right, temp.second + 1));
+    }
+
+    cout << "TOP VIEW of BINARY TREE: ";
+    for(auto i : mapper) cout << i.second << " ";
+    cout << endl;
 }
 int main()
 {
@@ -76,10 +93,7 @@ int main()
     cout << "LEVEL ORDER TRAVERSAL: " << endl;
     levelorder(root);
 
-    vector<int> right;
-    rightview(root, 0, right);
-    cout << "RIGHT VIEW of BINARY TREE: ";
-    for(auto i : right) cout << i << " ";
+    topview(root);
 
     return 0;
 }
