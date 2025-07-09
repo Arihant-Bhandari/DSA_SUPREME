@@ -24,7 +24,7 @@ void invert(int arr[], int start, int end, int &sum)
         arr[index++] = left[i++];
         else
         {
-            sum += mid + 1 - i;
+            sum += leftLen - i;
             arr[index++] = right[j++];
         }
     }
