@@ -42,46 +42,35 @@ void create_bst(TreeNode* &root)
         cin >> data;
     }
 }
-void preorder(TreeNode* root)
+void inorder(TreeNode* root, TreeNode* &head)
 {
     if(root == NULL) return;
 
-    cout << root -> val << " ";
-    preorder(root -> left);
-    preorder(root -> right);
-}
-void inorder(TreeNode* root)
-{
-    if(root == NULL) return;
+    inorder(root -> right, head);
 
-    inorder(root -> left);
-    cout << root -> val << " ";
-    inorder(root -> right);
-}
-void postorder(TreeNode* root)
-{
-    if(root == NULL) return;
+    root -> right = head;
+    if(head != NULL) head -> left = root;
 
-    postorder(root -> left);
-    postorder(root -> right);
-    cout << root -> val << " ";
+    head = root;
+    
+    inorder(root -> left, head);
 }
 int main()
 {
     TreeNode* root = NULL;
     create_bst(root);
 
-    cout << "PREORDER TRAVERSAL: ";
-    preorder(root);
-    cout << endl;
+    TreeNode* head = NULL;
+    inorder(root, head);
 
-    cout << "INORDER TRAVERSAL: ";
-    inorder(root);
-    cout << endl;
+    TreeNode* curr = head;
 
-    cout << "POSTORDER TRAVERSAL: ";
-    postorder(root);
-    cout << endl;
+    while(curr != NULL)
+    {
+        cout << curr -> val << " -> ";
+        curr = curr -> right;
+    }
+    cout << "X";
 
     return 0;
 }
