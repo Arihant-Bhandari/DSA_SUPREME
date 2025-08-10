@@ -1,14 +1,14 @@
 #include <iostream>
 using namespace std;
 
-class MaxHeap
+class MinHeap
 {
     public:
     int* arr;
     int capacity;
     int size;
 
-    MaxHeap(int capacity)
+    MinHeap(int capacity)
     {
         this -> arr = new int[capacity + 1];
         this -> capacity = capacity;
@@ -29,7 +29,7 @@ class MaxHeap
         {
             int parent = index / 2;
 
-            if(arr[index] > arr[parent]) 
+            if(arr[index] < arr[parent])
             {
                 swap(arr[index], arr[parent]);
                 index = parent;
@@ -47,24 +47,22 @@ class MaxHeap
 
         int answer = arr[1];
         arr[1] = arr[size--];
-        
+
         int index = 1;
 
         while(index <= size)
         {
-            int left = 2 * index;
-            int right = 2 * index + 1;
+            int smallest = index;
+            int left = index * 2;
+            int right = index * 2 + 1;
 
-            int largest = index;
+            if(left <= size && arr[smallest] > arr[left]) smallest = left;
+            if(right <= size && arr[smallest] > arr[right]) smallest = right;
 
-            if(left <= size && arr[largest] < arr[left]) largest = left;
-            
-            if(right <= size && arr[largest] < arr[right]) largest = right;
-            
-            if(largest != index)
+            if(smallest != index)
             {
-                swap(arr[largest], arr[index]);
-                index = largest;
+                swap(arr[smallest], arr[index]);
+                index = smallest;
             }
             else break;
         }
@@ -79,22 +77,18 @@ class MaxHeap
     }
     void heapify(int* arr, int size, int index)
     {
-        int left = index * 2;
-        int right = index * 2 + 1;
+        int left = 2 * index;
+        int right = 2 * index + 1;
 
-        int largest = index;
+        int smallest = index;
 
-        if(left <= size && arr[largest] < arr[left])
-        largest = left;
+        if(left <= size && arr[smallest] > arr[left]) smallest = left;
+        if(right <= size && arr[smallest] > arr[right]) smallest = right;
 
-        if(right <= size && arr[largest] < arr[right])
-        largest = right;
-
-        if(largest != index)
+        if(smallest != index)
         {
-            swap(arr[largest], arr[index]);
-
-            heapify(arr, size, largest);
+            swap(arr[smallest], arr[index]);
+            heapify(arr, size, smallest);
         }
     }
     void buildHeap(int* arr, int size)
@@ -102,14 +96,15 @@ class MaxHeap
         for(int i = size / 2; i > 0; i--) heapify(arr, size, i);
     }
 };
+
 int main()
 {
-    cout << "\t\tMAX HEAP\n";
+    cout << "\t\tMIN HEAP\n";
     int n;
     cout << "Enter Size: ";
     cin >> n;
 
-    MaxHeap heap(n);
+    MinHeap heap(n);
 
     for(int i = 0; i < n; i++)
     {
